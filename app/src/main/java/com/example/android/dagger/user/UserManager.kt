@@ -16,7 +16,12 @@
 
 package com.example.android.dagger.user
 
+import android.content.Context
 import com.example.android.dagger.storage.Storage
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -32,10 +37,16 @@ private const val PASSWORD_SUFFIX = "password"
 @Singleton
 class UserManager @Inject constructor(
     private val storage: Storage,
+    private val applicationContext: Context
     // Since UserManager will be in charge of managing the UserComponent lifecycle,
     // it needs to know how to create instances of it
-    private val userComponentFactory: UserComponent.Factory
+//    private val userComponentFactory: UserComponent.Factory
 ) {
+    @InstallIn(SingletonComponent::class)
+    @EntryPoint
+    interface UserEntryPoint {
+        fun userComponent(): UserComponent.Factory
+    }
 
     /**
      *  UserComponent is specific to a logged in user. Holds an instance of UserComponent.
@@ -83,6 +94,10 @@ class UserManager @Inject constructor(
 
     private fun userJustLoggedIn() {
         // When the user logs in, we create a new instance of UserComponent
-        userComponent = userComponentFactory.create()
+
+        // create an instance of userComponent by grabbing the factory from
+        // the app graph
+        val entrypoint = EntryPointAccessors.fromApplication(applicationContext, UserEntryPoint::class.java)
+        userComponent = entrypoint.userComponent().create()
     }
 }
