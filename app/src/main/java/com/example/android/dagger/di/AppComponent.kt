@@ -26,6 +26,7 @@ import javax.inject.Singleton
 
 // Scope annotation that the AppComponent uses
 // Classes annotated with @Singleton will have a unique instance in this Component
+
 @Singleton
 // Definition of a Dagger component that adds info from the different modules to the graph
 @Component(modules = [StorageModule::class])
@@ -39,7 +40,9 @@ interface AppComponent {
     }
 
     // Types that can be retrieved from the graph
-    fun registrationComponent(): RegistrationComponent.Factory
-    fun loginComponent(): LoginComponent.Factory
-    fun userManager(): UserManager
+//    fun registrationComponent(): RegistrationComponent.Factory
+//    fun loginComponent(): LoginComponent.Factory
+//    fun userManager(): UserManager
+
+
 }
