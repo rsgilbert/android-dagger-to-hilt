@@ -39,13 +39,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
-    @InstallIn(SingletonComponent::class)
-    @EntryPoint
-    interface LoginEntryPoint {
-        fun loginComponent() : LoginComponent.Factory
-    }
-
-    // @Inject annotated fields will be provided by Dagger
     @Inject
     lateinit var loginViewModel: LoginViewModel
 
@@ -53,8 +46,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val entryPoint = EntryPointAccessors.fromApplication<LoginEntryPoint>(this)
-        entryPoint.loginComponent().create().inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
