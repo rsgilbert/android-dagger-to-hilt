@@ -31,10 +31,13 @@ import com.example.android.dagger.main.MainActivity
 import com.example.android.dagger.registration.RegistrationActivity
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 
+
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     @InstallIn(SingletonComponent::class)
     @EntryPoint
