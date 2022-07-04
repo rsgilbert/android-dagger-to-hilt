@@ -17,31 +17,39 @@
 package com.example.android.dagger.user
 
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.random.Random
 
 /**
  * UserDataRepository contains user-specific data such as username and unread notifications.
  *
- * This object will have a unique instance in a Component that is annotated with
- * @LoggedUserScope (i.e. only UserComponent in this case).
  */
-@LoggedUserScope
-class UserDataRepository @Inject constructor(private val userManager: UserManager) {
+@Singleton
+class UserDataRepository @Inject constructor() {
+    var username: String? = null
+        private set
 
-    val username: String
-        get() = userManager.username
 
-    var unreadNotifications: Int
+    var unreadNotifications: Int? = null
+        private set
 
-    init {
+    fun initData(username: String) {
         unreadNotifications = randomInt()
+        this.username = username
+    }
+
+
+    fun cleanUp() {
+        this.unreadNotifications = -1
+        this.username = null
     }
 
     fun refreshUnreadNotifications() {
         unreadNotifications = randomInt()
     }
+    private fun randomInt(): Int {
+        return Random.nextInt(until = 100)
+    }
 }
 
-fun randomInt(): Int {
-    return Random.nextInt(until = 100)
-}
+

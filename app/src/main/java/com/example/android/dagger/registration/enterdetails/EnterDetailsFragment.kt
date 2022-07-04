@@ -30,8 +30,10 @@ import androidx.lifecycle.Observer
 import com.example.android.dagger.R
 import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.registration.RegistrationViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class EnterDetailsFragment : Fragment() {
 
     /**
@@ -59,7 +61,7 @@ class EnterDetailsFragment : Fragment() {
         super.onAttach(context)
 
         // Grabs the registrationComponent from the Activity and injects this Fragment
-        (activity as RegistrationActivity).registrationComponent.inject(this)
+//        (activity as RegistrationActivity).registrationComponent.inject(this)
     }
 
     override fun onCreateView(
@@ -69,7 +71,7 @@ class EnterDetailsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_enter_details, container, false)
 
-        enterDetailsViewModel.enterDetailsState.observe(this,
+        enterDetailsViewModel.enterDetailsState.observe(viewLifecycleOwner,
             Observer<EnterDetailsViewState> { state ->
                 when (state) {
                     is EnterDetailsSuccess -> {

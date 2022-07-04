@@ -34,6 +34,6 @@ interface UserComponent {
     }
 
     // Classes that can be injected by this Component
-    fun inject(activity: MainActivity)
-    fun inject(activity: SettingsActivity)
+//    fun inject(activity: MainActivity)
+//    fun inject(activity: SettingsActivity)
 }
