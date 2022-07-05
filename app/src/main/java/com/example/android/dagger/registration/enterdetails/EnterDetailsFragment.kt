@@ -26,6 +26,8 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.android.dagger.R
 import com.example.android.dagger.registration.RegistrationActivity
@@ -47,11 +49,8 @@ class EnterDetailsFragment : Fragment() {
      *
      * @Inject annotated fields will be provided by Dagger
      */
-    @Inject
-    lateinit var registrationViewModel: RegistrationViewModel
-
-    @Inject
-    lateinit var enterDetailsViewModel: EnterDetailsViewModel
+    private val registrationViewModel: RegistrationViewModel by activityViewModels()
+    private val enterDetailsViewModel: EnterDetailsViewModel by viewModels()
 
     private lateinit var errorTextView: TextView
     private lateinit var usernameEditText: EditText

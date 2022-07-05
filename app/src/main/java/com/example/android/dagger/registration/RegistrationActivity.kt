@@ -18,6 +18,7 @@ package com.example.android.dagger.registration
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
@@ -34,13 +35,7 @@ import javax.inject.Inject
 // Hist is reponsible for generating the component and injecting dependencies.
 @AndroidEntryPoint
 class RegistrationActivity : AppCompatActivity() {
-
-    // Stores an instance of RegistrationComponent so that its Fragments can access it
-//    lateinit var registrationComponent: RegistrationComponent
-
-    // @Inject annotated fields will be provided by Dagger
-    @Inject
-    lateinit var registrationViewModel: RegistrationViewModel
+    private val registrationViewModel: RegistrationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
